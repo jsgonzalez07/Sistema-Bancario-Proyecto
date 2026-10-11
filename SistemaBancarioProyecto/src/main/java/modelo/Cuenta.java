@@ -54,4 +54,18 @@ public abstract class Cuenta {
     public abstract boolean retirar(double valor);
 
     
+    public String mostrarInformacion() {
+        return "Numero: " + numero + "\n"
+             + "Dueño: " + dueño + "\n"
+             + "Fecha de apertura: " + fechaApertura + "\n"
+             + "Saldo: " + saldo;
+    }    
+    
+    
+    public String mostrarInformacion(boolean soloSaldo) {
+        if (soloSaldo) {
+            return "Saldo: " + saldo;
+        }
+        return mostrarInformacion();
+    }    
 }
