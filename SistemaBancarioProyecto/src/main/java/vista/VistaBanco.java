@@ -3,7 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package vista;
-
+import controlador.ControladorBanco;
 /**
  *
  * @author juans
@@ -11,12 +11,13 @@ package vista;
 public class VistaBanco extends javax.swing.JFrame {
     
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(VistaBanco.class.getName());
-
+    private ControladorBanco controlador;
     /**
      * Creates new form VistaBanco
      */
     public VistaBanco() {
         initComponents();
+        controlador = new ControladorBanco();
     }
 
     /**
@@ -203,7 +204,7 @@ public class VistaBanco extends javax.swing.JFrame {
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(txtCupoSobregiro, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(txtValorOperacion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(38, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -216,7 +217,9 @@ public class VistaBanco extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         pack();
@@ -231,27 +234,66 @@ public class VistaBanco extends javax.swing.JFrame {
     }//GEN-LAST:event_txtDiaActionPerformed
 
     private void btnCrearAhorrosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCrearAhorrosActionPerformed
-        // TODO add your handling code here:
+        try {
+            String numero = txtNumero.getText();
+            String dueño = txtDueño.getText();
+            int dia = Integer.parseInt(txtDia.getText());
+            int mes = Integer.parseInt(txtMes.getText());
+            int año = Integer.parseInt(txtAño.getText());
+            double saldoInicial = Double.parseDouble(txtSaldoInicial.getText());
+
+            String resultado = controlador.crearCuentaAhorros(numero, dueño, dia, mes, año, saldoInicial);
+            areaInformacion.setText(resultado);
+        } catch (NumberFormatException e) {
+            areaInformacion.setText("Error: revisa que día, mes, año y saldo sean números.");
+        }
     }//GEN-LAST:event_btnCrearAhorrosActionPerformed
 
     private void btnCrearCorrienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCrearCorrienteActionPerformed
-        // TODO add your handling code here:
+        try {
+            String numero = txtNumero.getText();
+            String dueño = txtDueño.getText();
+            int dia = Integer.parseInt(txtDia.getText());
+            int mes = Integer.parseInt(txtMes.getText());
+            int año = Integer.parseInt(txtAño.getText());
+            double saldoInicial = Double.parseDouble(txtSaldoInicial.getText());
+            double cupo = Double.parseDouble(txtCupoSobregiro.getText());
+
+            String resultado = controlador.crearCuentaCorriente(numero, dueño, dia, mes, año, saldoInicial, cupo);
+            areaInformacion.setText(resultado);
+        } catch (NumberFormatException e) {
+            areaInformacion.setText("Error: revisa que día, mes, año, saldo y cupo sean números.");
+        }
     }//GEN-LAST:event_btnCrearCorrienteActionPerformed
 
     private void btnConsignarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConsignarActionPerformed
-        // TODO add your handling code here:
+        try {
+            String numero = txtNumero.getText();
+            double valor = Double.parseDouble(txtValorOperacion.getText());
+
+            areaInformacion.setText(controlador.consignar(numero, valor));
+        } catch (NumberFormatException e) {
+            areaInformacion.setText("Error: el valor de la operación debe ser un número.");
+        }
     }//GEN-LAST:event_btnConsignarActionPerformed
 
     private void btnRetirarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRetirarActionPerformed
-        // TODO add your handling code here:
+        try {
+            String numero = txtNumero.getText();
+            double valor = Double.parseDouble(txtValorOperacion.getText());
+
+            areaInformacion.setText(controlador.retirar(numero, valor));
+        } catch (NumberFormatException e) {
+            areaInformacion.setText("Error: el valor de la operación debe ser un número.");
+        }
     }//GEN-LAST:event_btnRetirarActionPerformed
 
     private void btnConsultarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConsultarActionPerformed
-        // TODO add your handling code here:
+        areaInformacion.setText(controlador.consultarSaldo(txtNumero.getText()));
     }//GEN-LAST:event_btnConsultarActionPerformed
 
     private void btnInformacionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInformacionActionPerformed
-        // TODO add your handling code here:
+        areaInformacion.setText(controlador.consultarInformacion(txtNumero.getText()));
     }//GEN-LAST:event_btnInformacionActionPerformed
 
     /**

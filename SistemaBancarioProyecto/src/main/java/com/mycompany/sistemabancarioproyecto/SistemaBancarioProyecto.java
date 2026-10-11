@@ -3,7 +3,7 @@
  */
 
 package com.mycompany.sistemabancarioproyecto;
-
+import vista.VistaBanco;
 /**
  *
  * @author juans
@@ -11,6 +11,8 @@ package com.mycompany.sistemabancarioproyecto;
 public class SistemaBancarioProyecto {
 
     public static void main(String[] args) {
-        System.out.println("Hello World!");
+        VistaBanco ventana = new VistaBanco();
+        ventana.setLocationRelativeTo(null);        
+        ventana.setVisible(true);
     }
 }
