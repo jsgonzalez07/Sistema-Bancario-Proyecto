@@ -43,5 +43,23 @@ public class ControladorBanco {
         }
         cuentas.add(nueva);
         return "Cuenta de ahorros " + numero + " creada correctamente.";
-    }    
+    }
+
+
+    public String crearCuentaCorriente(String numero, String dueño, int dia, int mes, int año, double saldoInicial, double cupoSobregiro) {
+        if (buscarCuenta(numero) != null) {
+            return "Ya existe una cuenta con el número " + numero;
+        }
+        Fecha fecha = new Fecha(dia, mes, año);
+        Cuenta nueva;
+        if (saldoInicial == 0) {
+            nueva = new CuentaCorriente(numero, dueño, fecha, cupoSobregiro);
+        } else {
+            nueva = new CuentaCorriente(numero, dueño, fecha, saldoInicial, cupoSobregiro);
+        }
+        cuentas.add(nueva);
+        return "Cuenta corriente " + numero + " creada correctamente.";
+    }
+
+    
 }
