@@ -92,5 +92,14 @@ public class ControladorBanco {
             return "No se encontró la cuenta " + numero;
         }
         return cuenta.mostrarInformacion(true);
+    }
+
+
+    public String consultarInformacion(String numero) {
+        Cuenta cuenta = buscarCuenta(numero);
+        if (cuenta == null) {
+            return "No se encontró la cuenta " + numero;
+        }
+        return cuenta.mostrarInformacion();
     }    
 }
