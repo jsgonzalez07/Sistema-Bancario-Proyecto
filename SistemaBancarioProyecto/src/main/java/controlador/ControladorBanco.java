@@ -61,5 +61,17 @@ public class ControladorBanco {
         return "Cuenta corriente " + numero + " creada correctamente.";
     }
 
+
+    public String consignar(String numero, double valor) {
+        Cuenta cuenta = buscarCuenta(numero);
+        if (cuenta == null) {
+            return "No se encontró la cuenta " + numero;
+        }
+        if (cuenta.consignar(valor)) {
+            return "Consignación exitosa.\n" + cuenta.mostrarInformacion(true);
+        }
+        return "El valor a consignar debe ser mayor que 0.";
+    }
+
     
 }
