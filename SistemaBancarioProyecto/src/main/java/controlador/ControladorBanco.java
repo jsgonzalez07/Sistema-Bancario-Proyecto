@@ -27,5 +27,21 @@ public class ControladorBanco {
             }
         }
         return null;
+    }
+
+
+    public String crearCuentaAhorros(String numero, String dueño, int dia, int mes, int año, double saldoInicial) {
+        if (buscarCuenta(numero) != null) {
+            return "Ya existe una cuenta con el número " + numero;
+        }
+        Fecha fecha = new Fecha(dia, mes, año);
+        Cuenta nueva;
+        if (saldoInicial == 0) {
+            nueva = new CuentaAhorros(numero, dueño, fecha);
+        } else {
+            nueva = new CuentaAhorros(numero, dueño, fecha, saldoInicial);
+        }
+        cuentas.add(nueva);
+        return "Cuenta de ahorros " + numero + " creada correctamente.";
     }    
 }
