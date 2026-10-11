@@ -43,4 +43,15 @@ public abstract class Cuenta {
     }
     
     
+    public boolean consignar(double valor) {
+        if (valor <= 0) {
+            return false;
+        }
+        saldo = saldo + valor;
+        return true;
+    }
+    
+    public abstract boolean retirar(double valor);
+
+    
 }
