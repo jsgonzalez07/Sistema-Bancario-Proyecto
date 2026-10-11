@@ -83,5 +83,14 @@ public class ControladorBanco {
             return "Retiro exitoso.\n" + cuenta.mostrarInformacion(true);
         }
         return "Retiro rechazado: fondos insuficientes o valor no válido.";
+    }
+
+
+    public String consultarSaldo(String numero) {
+        Cuenta cuenta = buscarCuenta(numero);
+        if (cuenta == null) {
+            return "No se encontró la cuenta " + numero;
+        }
+        return cuenta.mostrarInformacion(true);
     }    
 }
